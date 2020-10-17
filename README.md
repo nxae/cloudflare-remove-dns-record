@@ -4,8 +4,10 @@ Deletes CloudFlare DNS record by ID or record name.
 
 ## Usage
 
+Inside ```[project_root]/.github/workflows/[cf-remove-dns].yaml``` create or include below lines in repo's workflow file
+
 ```yaml
-name: example
+name: CI removing CF DNS record
 on:
   pull_request:
     type: [closed]
@@ -13,9 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: kriasoft/delete-dns-record@v1
+      - uses: nxae/cloudflare-remove-dns-record@v2
         with:
-          name: "{PR}-review.example.com"
+          name: "{PR}-review.${{ secrets.DOMAIN }}"
           token: ${{ secrets.CLOUDFLARE_TOKEN }}
           zone: ${{ secrets.CLOUDFLARE_ZONE }}
 ```
